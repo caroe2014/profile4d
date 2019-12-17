@@ -45,7 +45,12 @@ steps:
     arguments: '--runtime linux-x64'
     workingDirectory: '$(Build.ArtifactStagingDirectory)' 
 
-
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--runtime linux-x64'
+    workingDirectory: '$(build.artifactstagingdirectory)'
 
 - task: Npm@1
   displayName: 'npm install'
@@ -84,12 +89,7 @@ steps:
 #    projects: '$(Parameters.TestProjects)'
 #    arguments: '--configuration $(BuildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    arguments: '--runtime linux-x64'
-    workingDirectory: '$(build.artifactstagingdirectory)'
+
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
