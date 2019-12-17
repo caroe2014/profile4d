@@ -35,11 +35,18 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: Build
+#  inputs:
+#    command: '$(system.defaultworkingdirectory)'
+#    projects: '**/Web.Site.csproj'
+#    arguments: '--configuration $- task: DotNetCoreCLI@2 
   inputs:
-    command: '$(system.defaultworkingdirectory)'
+    command: 'build'
     projects: '**/Web.Site.csproj'
     arguments: '--configuration $(Build.ArtifactStagingDirectory) --runtime ubuntu.18.04-x64'
+    workingDirectory: '$(Build.ArtifactStagingDirectory)' --runtime ubuntu.18.04-x64'
     workingDirectory: src/Web.Site
+
+
 
 - task: Npm@1
   displayName: 'npm install'
