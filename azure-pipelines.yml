@@ -13,8 +13,6 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  Parameters.RestoreBuildProjects:
-  BuildConfiguration:
   
 pool:
   name: Azure Pipelines
@@ -33,13 +31,13 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '$(Parameters.RestoreBuildProjects)'
+    projects: '$(Build.SourcesDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
-    projects: '$(Parameters.RestoreBuildProjects)'
-    arguments: '--configuration $(BuildConfiguration) --runtime ubuntu.18.04-x64'
+    projects: '$(Build.SourcesDirectory)'
+    arguments: '--configuration $(Build.ArtifactStagingDirectory) --runtime ubuntu.18.04-x64'
 
 - task: Npm@1
   displayName: 'npm install'
