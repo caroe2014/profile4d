@@ -42,7 +42,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/Web.Site.csproj'
-    arguments: '--runtime ubuntu.18.04-x64'
+    arguments: '--runtime linux-x64'
     workingDirectory: '$(Build.ArtifactStagingDirectory)' 
 
 
@@ -85,17 +85,14 @@ steps:
 #    arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: Publish
   inputs:
-    command: publish
+    command: 'publish'
     publishWebProjects: false
-    projects: '$(Parameters.RestoreBuildProjects)'
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) --runtime linux-x64'
-    zipAfterPublish: True
+    arguments: '--runtime linux-x64'
+    workingDirectory: '$(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
-
