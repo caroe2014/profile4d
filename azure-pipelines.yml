@@ -27,11 +27,11 @@ variables:
 #Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: restore
-    projects: '$(system.defaultworkingdirectory)'
+#- task: DotNetCoreCLI@2
+#  displayName: Restore
+#  inputs:
+#    command: restore
+#    projects: '$(system.defaultworkingdirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -45,14 +45,6 @@ steps:
     arguments: '--runtime linux-x64'
     workingDirectory: '$(Build.ArtifactStagingDirectory)' 
 
-- task: DotNetCoreCLI@2 
-  displayName: Publish 
-  inputs: 
-    command: publish 
-    publishWebProjects: false 
-    projects: '$(Build.ArtifactStagingDirectory)' 
-    arguments: '--configuration $(Build.ArtifactStagingDirectory) --output $(build.artifactstagingdirectory) --runtime linux-x64' 
-    zipAfterPublish: True 
 
 
 - task: Npm@1
