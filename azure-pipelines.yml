@@ -28,15 +28,16 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Res   tore
+  displayName: Restore
   inputs:
     version: '3.0'
-    command: restore
+    command: 'restore'
     projects: '$(system.defaultworkingdirectory)'
 - task: DotNetCoreCLI@2 
   displayName: Build 
   inputs: 
     version: '3.0'
+    command: 'build'
     projects: '$(system.defaultworkingdirectory)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64'
 
@@ -45,6 +46,7 @@ steps:
   inputs: 
     workingDir: src/Web.Site/ 
     verbose: false 
+
 - task: Npm@1 
   displayName: 'npm lint fix CRLF' 
   inputs: 
@@ -63,7 +65,7 @@ steps:
   displayName: Publish 
   inputs:
     version: '3.0'
-    command: publish 
+    command: 'publish'
     publishWebProjects: false 
     projects: '$(system.defaultworkingdirectory)' 
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) --runtime linux-x64' 
