@@ -39,3 +39,9 @@ steps:
     version: '3.0'
     projects: '$(system.defaultworkingdirectory)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64' 
+
+- task: PublishBuildArtifacts@1 
+  displayName: 'Publish Artifact' 
+  inputs: 
+    PathtoPublish: '$(build.artifactstagingdirectory)' 
+  condition: succeededOrFailed()
