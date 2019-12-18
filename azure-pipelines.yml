@@ -27,70 +27,9 @@ variables:
 #Your build pipeline references the ‘BuildConfiguration’ variable, which you’ve selected to be settable at queue time. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab, and then select the option to make it settable at queue time. See https://go.microsoft.com/fwlink/?linkid=865971
 
 steps:
-#- task: DotNetCoreCLI@2
-#  displayName: Restore
-#  inputs:
-#    command: restore
-#    projects: '$(system.defaultworkingdirectory)'
-
-#- task: DotNetCoreCLI@2
-  displayName: Build V1.0
-#  inputs:
-#    command: '$(system.defaultworkingdirectory)'
-#    projects: '**/Web.Site.csproj'
-#    arguments: '--configuration $
-
 - task: DotNetCoreCLI@2
-  displayName: Build V2.0
+  displayName: Restore
   inputs:
-    command: 'build'
-    projects: '**/Web.Site.csproj'
-    arguments: '--runtime linux-x64'
-    workingDirectory: '$(Build.ArtifactStagingDirectory)' 
+    command: restore
+    projects: '$(system.defaultworkingdirectory)'
 
-
-
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    workingDir: src/Web.Site/
-    verbose: false
-
-- task: Npm@1
-  displayName: 'npm lint fix CRLF'
-  inputs:
-    command: custom
-    workingDir: src/Web.Site/
-    verbose: false
-    customCommand: 'run lint -- --fix'
-
-#- task: Npm@1
-#  displayName: 'npm test'
-#  inputs:
-#    command: custom
-#    workingDir: src/Web.Site/
-#    verbose: false
-#    customCommand: 'run test'
-
-- task: Npm@1
-  displayName: 'npm production'
-  inputs:
-    command: custom
-    workingDir: src/Web.Site/
-    verbose: false
-    customCommand: 'run production'
-
-#- task: DotNetCoreCLI@2
-#  displayName: Test
-#  inputs:
-#    command: test
-#    projects: '$(Parameters.TestProjects)'
-#    arguments: '--configuration $(BuildConfiguration)'
-
-
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
