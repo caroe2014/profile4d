@@ -31,5 +31,6 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '$(System.DefaultWorkingDirectory)'
+    projects: '$(Parameters.RestoreBuildProjects)'
+​
 
