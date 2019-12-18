@@ -38,44 +38,8 @@ steps:
   inputs: 
     version: '3.0'
     projects: '$(system.defaultworkingdirectory)' 
-    arguments: '--configuration $(BuildConfiguration) --runtime linux-x64' 
+    arguments: '--configuration $(BuildConfiguration) --runtime linux-x64'
 
-- task: Npm@1 
-  displayName: 'npm install' 
-  inputs: 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-​
-- task: Npm@1 
-  displayName: 'npm lint fix CRLF' 
-  inputs: 
-    command: custom 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-    customCommand: 'run lint -- --fix' 
-​
-- task: Npm@1 
-  displayName: 'npm test' 
-  inputs: 
-    command: custom 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-    customCommand: 'run test' 
-​
-- task: Npm@1 
-  displayName: 'npm production' 
-  inputs: 
-    command: custom 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-    customCommand: 'run production' 
-​
-- task: DotNetCoreCLI@2 
-  displayName: Test 
-  inputs: 
-    command: test 
-    projects: '$(Parameters.TestProjects)' 
-    arguments: '--configuration $(BuildConfiguration)' 
 - task: DotNetCoreCLI@2 
   displayName: Publish 
   inputs:
