@@ -33,12 +33,15 @@ steps:
 #    command: restore
 #    projects: '$(system.defaultworkingdirectory)'
 
-- task: DotNetCoreCLI@2
-  displayName: Build
+#- task: DotNetCoreCLI@2
+  displayName: Build V1.0
 #  inputs:
 #    command: '$(system.defaultworkingdirectory)'
 #    projects: '**/Web.Site.csproj'
-#    arguments: '--configuration $- task: DotNetCoreCLI@2 
+#    arguments: '--configuration $
+
+- task: DotNetCoreCLI@2
+  displayName: Build V2.0
   inputs:
     command: 'build'
     projects: '**/Web.Site.csproj'
