@@ -31,5 +31,5 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '$(system.defaultworkingdirectory)'
+    projects: '$(Build.BinariesDirectory)'
 
