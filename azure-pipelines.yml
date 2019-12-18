@@ -40,6 +40,15 @@ steps:
     projects: '$(system.defaultworkingdirectory)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64' 
 
+- task: DotNetCoreCLI@2 
+  displayName: Publish 
+  inputs:
+    version: '3.0'
+    command: publish 
+    publishWebProjects: false 
+    projects: '$(system.defaultworkingdirectory)' 
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) --runtime linux-x64' 
+    zipAfterPublish: True 
 - task: PublishBuildArtifacts@1 
   displayName: 'Publish Artifact' 
   inputs: 
