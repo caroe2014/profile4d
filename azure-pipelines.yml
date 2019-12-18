@@ -28,7 +28,14 @@ variables:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: Restore
+  displayName: Res   tore
   inputs:
+    version: '3.0'
     command: restore
     projects: '$(system.defaultworkingdirectory)'
+- task: DotNetCoreCLI@2 
+  displayName: Build 
+  inputs: 
+    version: '3.0'
+    projects: '$(system.defaultworkingdirectory)' 
+    arguments: '--configuration $(BuildConfiguration) --runtime linux-x64' 
