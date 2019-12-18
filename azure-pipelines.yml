@@ -8,6 +8,8 @@ trigger:
  
 pool:
   vmImage: 'Ubuntu-16.04'
+  name: Azure Pipelines
+  demands: npm
 
 variables:
   solution: '**/*.sln'
