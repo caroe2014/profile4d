@@ -50,7 +50,8 @@ steps:
     command: 'publish'
     publishWebProjects: false
     arguments: '--runtime linux-x64'
-    #workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: True
 
 - task: Npm@1
   displayName: 'npm install'
