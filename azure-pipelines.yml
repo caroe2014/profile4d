@@ -34,13 +34,15 @@ steps:
   inputs:
     version: '3.0'
     command: 'restore'
-    projects: '$(system.defaultworkingdirectory)'
+#    projects: '$(system.defaultworkingdirectory)'
+    projects: '$(Parameters.RestoreBuildProjects)' 
 - task: DotNetCoreCLI@2 
   displayName: Build 
   inputs: 
     version: '3.0'
     command: 'build'
-    projects: '$(system.defaultworkingdirectory)' 
+#    projects: '$(system.defaultworkingdirectory)'
+    projects: '$(Parameters.RestoreBuildProjects)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64'
 
 - task: Npm@1 
