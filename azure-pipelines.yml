@@ -34,22 +34,22 @@ steps:
   inputs:
     version: '3.0'
     command: 'restore'
-#    projects: '$(system.defaultworkingdirectory)'
-    projects: '$(Parameters.RestoreBuildProjects)' 
+    projects: '$(system.defaultworkingdirectory)'
+#    projects: '$(Parameters.RestoreBuildProjects)' 
 - task: DotNetCoreCLI@2 
   displayName: Build 
   inputs: 
     version: '3.0'
     command: 'build'
-#    projects: '$(system.defaultworkingdirectory)'
-    projects: '$(Parameters.RestoreBuildProjects)' 
+    projects: '$(system.defaultworkingdirectory)'
+#    projects: '$(Parameters.RestoreBuildProjects)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64'
 
 - task: Npm@1 
   displayName: 'npm install' 
   inputs: 
     workingDir: src/Web.Site/ 
-    verbose: false 
+    verbose: true 
 
 - task: Npm@1 
   displayName: 'npm lint fix CRLF' 
@@ -67,7 +67,7 @@ steps:
     customCommand: 'run production'
 
 - task: DotNetCoreCLI@2 
-  displayName: Publish 
+  displayName: Publish Web.Site
   inputs:
     version: '3.0'
     command: 'publish'
@@ -75,6 +75,7 @@ steps:
     projects: '$(system.defaultworkingdirectory)' 
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory) --runtime linux-x64' 
     zipAfterPublish: True 
+
 - task: PublishBuildArtifacts@1 
   displayName: 'Publish Artifact' 
   inputs: 
