@@ -32,14 +32,14 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
-#    version: '3.0'
+    version: '3.0'
     command: 'restore'
 #    projects: '$(system.defaultworkingdirectory)'
     projects: '$(Parameters.RestoreBuildProjects)' 
 - task: DotNetCoreCLI@2 
   displayName: Build 
   inputs: 
-#    version: '3.0'
+    version: '3.0'
     command: 'build'
 #    projects: '$(system.defaultworkingdirectory)'
     projects: '$(Parameters.RestoreBuildProjects)' 
