@@ -50,12 +50,15 @@ steps:
   inputs:
     versionSpec: 10.14
 
-- bash:|
-    yarn install --force
-    yarn build --output-path dist
-#    run lint -- --fix
-  workingDirectory: '$(Build.SourcesDirectory)/src/Web.Site/'
-  displayName: 'npm install and build
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      Yarn install --force
+      Yarn build --output-path dist
+      
+      echo 'Yarn Install & Build'
+    workingDirectory: '$(Build.SourcesDirectory)/src/Web.Site/'
 
 - task: DotNetCoreCLI@2 
   displayName: Publish Web.Site
