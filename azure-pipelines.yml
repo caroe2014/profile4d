@@ -58,7 +58,8 @@ steps:
 - task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@3
   displayName: 'Yarn build'
   inputs:
-    projectDirectory: '$(system.defaultworkingdirectory)src/Web.Site/'
+    projectDirectory: '$(system.defaultworkingdirectory)'
+    workingDir: src/Web.Site/
     arguments: build
 
 - task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@3
