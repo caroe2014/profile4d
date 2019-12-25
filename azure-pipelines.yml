@@ -45,26 +45,27 @@ steps:
 #    projects: '$(Parameters.RestoreBuildProjects)' 
     arguments: '--configuration $(BuildConfiguration) --runtime linux-x64'
 
-- task: Npm@1 
-  displayName: 'npm install' 
-  inputs: 
-    workingDir: src/Web.Site/ 
-    verbose: true 
+- task: NodeTool@0
+  displayName: 'Use Node version'
+  inputs:
+    versionSpec: 10.14
 
-- task: Npm@1 
-  displayName: 'npm lint fix CRLF' 
-  inputs: 
-    command: custom 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-    customCommand: 'run lint -- --fix' 
-- task: Npm@1 
-  displayName: 'npm production' 
-  inputs: 
-    command: custom 
-    workingDir: src/Web.Site/ 
-    verbose: false 
-    customCommand: 'run production'
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@3
+  displayName: 'Yarn install force'
+  inputs:
+    projectDirectory: '$(system.defaultworkingdirectory)src/Web.Site/'
+    arguments: 'install  --force'
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@3
+  displayName: 'Yarn build'
+  inputs:
+    projectDirectory: '$(system.defaultworkingdirectory)src/Web.Site/'
+    arguments: build
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@3
+  displayName: 'Yarn lint fix CRLF'
+  inputs:
+    projectDirectory: '$(system.defaultworkingdirectory)src/Web.Site/'
+    arguments: 'run lint -- --fix'
 
 - task: DotNetCoreCLI@2 
   displayName: Publish Web.Site
