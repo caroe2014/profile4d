@@ -50,7 +50,7 @@ steps:
   inputs:
     versionSpec: 10.14
 
-- script: |
+- script: 
     yarn install 
     yarn build
 #    run lint -- --fix
