@@ -51,8 +51,8 @@ steps:
     versionSpec: 10.14
 
 - script: |
-    yarn install --force
-    yarn build --output-path dist
+    yarn install 
+    yarn build
 #    run lint -- --fix
   workingDirectory: '$(Build.SourcesDirectory)/src/Web.Site/'
   displayName: 'npm install and build
