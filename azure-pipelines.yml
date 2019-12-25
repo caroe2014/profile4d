@@ -51,7 +51,7 @@ steps:
     versionSpec: 10.14
 
 - script: 
-    yarn install 
+    yarn install --force
     yarn build
 #    run lint -- --fix
   workingDirectory: '$(Build.SourcesDirectory)/src/Web.Site/'
