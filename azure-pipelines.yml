@@ -56,7 +56,6 @@ steps:
     script: |
       Yarn install --force
       Yarn build --output-path dist
-      
       echo 'Yarn Install & Build'
     workingDirectory: '$(Build.SourcesDirectory)/src/Web.Site/'
 
