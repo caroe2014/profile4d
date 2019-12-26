@@ -49,6 +49,14 @@ steps:
   displayName: 'Use Node version'
   inputs:
     versionSpec: 10.14
+steps:
+
+- task: ArchiveFiles@2
+  displayName: 'Archive application'
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/build'
+    includeRootFolder: false
+
 
 - task: Bash@3
   inputs:
